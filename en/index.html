@@ -3163,7 +3163,7 @@ function awBuildPrompt(KB, TYPES, type, task, essay, lang) {
     return '<ol class="ai-errs">' + errors.map((er, i) => `<li><b>${i + 1}.</b> <span class="cat">${esc(er.category || 'error')}</span><span class="bad">${esc(er.quote)}</span> → <span class="good">${esc(er.correction)}</span><div class="small">${esc(er.explain_vi)}</div></li>`).join('') + '</ol>';
   }
   function renderEssay(r, essay, t) {
-    const crit = (r.criteria || []).map(c => `<div class="ai-score"><div class="k">${esc(c.name)}</div><div class="v">${esc(c.band)}</div><div class="why">${esc(c.comment_vi)}</div></div>`).join('');
+    const crit = (r.criteria || []).map((c, i) => `<div class="ai-score"><div class="k">${esc((t.criteria || [])[i] || c.name)}</div><div class="v">${esc(c.band)}</div><div class="why">${esc(c.comment_vi)}</div></div>`).join('');
     const mix = r.sentence_mix || {};
     const ups = (r.upgrades || []).map(u => `<li><span class="bad" style="text-decoration:none;color:var(--ink-2)">${esc(u.original)}</span><br>→ <span class="good">${esc(u.improved)}</span><div class="small">${esc(u.why_vi)}</div></li>`).join('');
     return `
